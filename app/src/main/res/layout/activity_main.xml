@@ -12,7 +12,7 @@
         android:layout_width="144dp"
         android:layout_height="47dp"
         android:background="@color/white"
-        android:text="Register"
+        android:text="Regıster"
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="511dp" />
 
@@ -21,7 +21,7 @@
         android:layout_width="144dp"
         android:layout_height="48dp"
         android:background="@color/white"
-        android:text="Login"
+        android:text="Logın"
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="451dp" />
 
@@ -49,10 +49,10 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buraya aciklayici bir seyler yazilabilir"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="257dp" />
+        android:layout_width="335dp"
+        android:layout_height="38dp"
+        android:text="Buraya aciklayici bir seyler yazilabilir ya da bi illustrasyon konulabilir"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="272dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
