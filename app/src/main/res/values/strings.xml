@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">charity-app</string>
+    <string name="app_name">Charity App</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

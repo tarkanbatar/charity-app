@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F15656"
+    tools:context=".MainActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="144dp"
+        android:layout_height="47dp"
+        android:background="@color/white"
+        android:text="Regıster"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="144dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:text="Logın"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="64dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="CharityApp"
+        android:textAlignment="center"
+        android:textColor="#ECE2E2"
+        android:textSize="60sp"
+        android:typeface="normal"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Forgot password?"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="335dp"
+        android:layout_height="38dp"
+        android:gravity="center"
+        android:text="Buraya aciklayici bir seyler yazilabilir ya da bi illustrasyon konulabilir"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="64dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

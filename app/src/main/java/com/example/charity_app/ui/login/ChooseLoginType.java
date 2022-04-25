@@ -1,25 +1,17 @@
 package com.example.charity_app.ui.login;
 
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.charity_app.databinding.FragmentChooseLoginTypeBinding;
 
@@ -47,99 +39,78 @@ public class ChooseLoginType extends Fragment {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
-        final ProgressBar loadingProgressBar = binding.loading;
+        final Button btnUser = binding.btnUser;
+        final Button btnCarrier = binding.btnCarrier;
+        final Button btnBenefactor = binding.btnBenefactor;
+        final Button btnAdmin = binding.btnAdmin;
 
-        loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {
+        btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
+            public void onClick(View view) {
+                goUserFragment();
             }
         });
 
-        loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), new Observer<LoginResult>() {
+        btnCarrier.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
+            public void onClick(View view) {
+                goCarrierFragment();
             }
         });
 
-        TextWatcher afterTextChangedListener = new TextWatcher() {
+        btnBenefactor.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
+            public void onClick(View view) {
+                goBenefactorFragment();
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        btnAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+            public void onClick(View view) {
+                goAdminFragment();
             }
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        if (getContext() != null && getContext().getApplicationContext() != null) {
-            Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        }
+    private void goUserFragment() {
+        LoginFragment fragment = new LoginFragment();
+        FragmentManager manager = getParentFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction
+                .replace(R.id.fragment_container, fragment, "LoginFragment")
+                .addToBackStack("Login");
+        transaction.commit();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        if (getContext() != null && getContext().getApplicationContext() != null) {
-            Toast.makeText(
-                    getContext().getApplicationContext(),
-                    errorString,
-                    Toast.LENGTH_LONG).show();
-        }
+    private void goCarrierFragment() {
+        CarrierLogin fragment = new CarrierLogin();
+        FragmentManager manager = getParentFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction
+                .replace(R.id.fragment_container, fragment, "CarrierFragment")
+                .addToBackStack("Carrier");
+        transaction.commit();
+    }
+
+    private void goBenefactorFragment() {
+        BenefactorLogin fragment = new BenefactorLogin();
+        FragmentManager manager = getParentFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction
+                .replace(R.id.fragment_container, fragment, "BenefactorFragment")
+                .addToBackStack("Benefactor");
+        transaction.commit();
+    }
+
+    private void goAdminFragment() {
+        AdminLogin fragment = new AdminLogin();
+        FragmentManager manager = getParentFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction
+                .replace(R.id.fragment_container, fragment, "AdminFragment")
+                .addToBackStack("Admin");
+        transaction.commit();
     }
 
     @Override
