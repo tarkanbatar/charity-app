@@ -1,5 +1,7 @@
 package com.example.charity_app.ui.login;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.example.charity_app.databinding.FragmentAdminLoginBinding;
 
 import com.example.charity_app.R;
+import com.example.charity_app.ui.dashboard.DashboardFragment;
 
 public class AdminLogin extends Fragment {
 
@@ -79,7 +82,7 @@ public class AdminLogin extends Fragment {
                     showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                    goDashboardFragment();
                 }
             }
         });
@@ -103,17 +106,6 @@ public class AdminLogin extends Fragment {
         };
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,12 +117,14 @@ public class AdminLogin extends Fragment {
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        if (getContext() != null && getContext().getApplicationContext() != null) {
-            Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        }
+    private void goDashboardFragment() {
+        DashboardFragment fragment = new DashboardFragment();
+        FragmentManager manager = getParentFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction
+                .replace(R.id.fragment_container, fragment, "DashboardFragment")
+                .addToBackStack("Dashboard");
+        transaction.commit();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

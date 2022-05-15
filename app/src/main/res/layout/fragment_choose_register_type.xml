@@ -18,7 +18,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Choose Login Type"
+        android:text="Choose Register Type"
         android:textColor="#ECE2E2"
         android:textSize="34sp"
         android:typeface="normal"
@@ -58,16 +58,6 @@
         app:layout_constraintEnd_toEndOf="@+id/btnCarrier"
         app:layout_constraintStart_toStartOf="@+id/btnCarrier"
         app:layout_constraintTop_toBottomOf="@+id/btnCarrier" />
-
-    <Button
-        android:id="@+id/btnAdmin"
-        android:layout_width="160dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:text="ADMIN"
-        app:layout_constraintEnd_toEndOf="@+id/btnBenefactor"
-        app:layout_constraintStart_toStartOf="@+id/btnBenefactor"
-        app:layout_constraintTop_toBottomOf="@+id/btnBenefactor" />
 
     <Button
         android:id="@+id/btnUser"

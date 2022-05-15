@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.charity_app.R;
 import com.example.charity_app.databinding.FragmentMainBinding;
+import com.example.charity_app.ui.forgetpassword.ForgetPassword;
+import com.example.charity_app.ui.register.ChooseRegisterType;
 
 /**
  * Created by Tarkan BATAR on 25.04.2022
@@ -37,12 +40,23 @@ public class MainFragment extends Fragment {
 
         final Button btnLogin = binding.btnLogin;
         final Button btnRegister = binding.btnRegister;
+        final TextView tvForgetPassword = binding.tvForgotPassword;
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goChooseFragment();
             }
+        });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { goRegisterChooseFragment(); }
+        });
+
+        tvForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { goForgetPasswordFragment(); }
         });
     }
 
@@ -53,6 +67,26 @@ public class MainFragment extends Fragment {
         transaction
             .replace(R.id.fragment_container, chooseLoginTypeFragment, "ChooseFragment")
             .addToBackStack("Choose");
+        transaction.commit();
+    }
+
+    private void goRegisterChooseFragment() {
+        ChooseRegisterType chooseRegisterTypeFragment = new ChooseRegisterType();
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction
+                .replace(R.id.fragment_container, chooseRegisterTypeFragment, "RegisterChooseFragment")
+                .addToBackStack("RegisterChoose");
+        transaction.commit();
+    }
+
+    private void goForgetPasswordFragment() {
+        ForgetPassword forgetPasswordFragment = new ForgetPassword();
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction
+                .replace(R.id.fragment_container, forgetPasswordFragment, "ForgetPassword")
+                .addToBackStack("ForgetPassword");
         transaction.commit();
     }
 }
