@@ -16,7 +16,7 @@ import com.example.charity_app.R;
 import com.example.charity_app.databinding.FragmentMainBinding;
 
 /**
- * Created by Emre BAHADIR on 25.04.2022
+ * Created by Tarkan BATAR on 25.04.2022
  * Copyright (c) 2022 ProcedureSoft All rights reserved.
  */
 public class MainFragment extends Fragment {
